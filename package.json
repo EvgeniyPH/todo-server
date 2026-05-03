@@ -2,9 +2,12 @@
   "name": "todo-server",
   "version": "1.0.0",
   "description": "This repository contains the server-side code for the Todo application, built using Node.js and Express.",
-  "main": "index.js",
+  "main": "src/server.ts",
   "scripts": {
-    "dev": "nodemon index.js"
+    "build": "tsc && tsc-alias && echo 'Build Finished!'",
+    "start": "node dist/server.js",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node -r tsconfig-paths/register' src/server.ts",
+    "lint": "eslint 'src/**/*.ts'"
   },
   "repository": {
     "type": "git",
@@ -18,14 +21,27 @@
   },
   "homepage": "https://github.com/EvgeniyPH/todo-server#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "joi": "^18.1.2",
+    "jsonwebtoken": "^9.0.3",
     "pg": "^8.20.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.8"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.6.0",
+    "eslint": "^10.2.1",
+    "nodemon": "^3.1.14",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.17",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^6.0.3"
   }
 }
