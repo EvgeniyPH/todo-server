@@ -7,41 +7,46 @@ import { ITodo } from '@/types'
 class TodoController {
   constructor() {}
 
+  /**
+   * Get all todos
+   * @param req IRequestPayload
+   * @param res Response
+   * @param next NextFunction
+   * @returns void
+   */
   async getAllTodos(req: IRequestPayload, res: Response, next: NextFunction): Promise<void> {
     try {
       if (!req.payload) {
         throw new ApiErrors('Access denied', 403)
       }
 
-      const result = await getAllTodosService(req.payload.userId)
+      const result = await getAllTodosService(req)
 
       res.status(201).json({
-        data: result,
+        todos: result,
       })
     } catch (error) {
       next(error)
     }
   }
 
+  /**
+   * Create a new todo
+   * @param req IRequestPayload
+   * @param res Response
+   * @param next NextFunction
+   * @returns void
+   */
   async createTodo(req: IRequestPayload, res: Response, next: NextFunction): Promise<void> {
     try {
       if (!req.payload) {
         throw new ApiErrors('Access denied', 403)
       }
 
-      const todoData: ITodo = {
-        title: req.body?.title || '',
-        description: req.body?.description || '',
-        priority: req.body?.priority || '',
-        dueDate: req.body?.dueDate || '',
-        userId: req.payload.userId,
-        completed: false,
-        tags: req.body?.tags || [],
-      }
-      const result = await createTodoService(todoData)
+      const result = await createTodoService(req)
 
       res.status(201).json({
-        data: result,
+        todo: result,
       })
     } catch (error) {
       next(error)

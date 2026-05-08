@@ -42,3 +42,9 @@ export interface ITodoTag {
 export interface IRequestPayload extends Request {
   payload?: JwtPayload
 }
+
+export interface TodoFilterParams {
+  title?: string
+  completed?: boolean
+  userId: number
+}

@@ -4,12 +4,11 @@ import { verifyJWT } from '@/utils/jwtUtils'
 import { NextFunction, Response } from 'express'
 import { IRequestPayload } from '@/types'
 
-const decodeToken = async (header: string | undefined) => {
-  if (!header) {
+const decodeToken = async (token: string | undefined) => {
+  if (!token) {
     throw new ApiErrors('Authorization header missing', 401)
   }
 
-  const token = header.replace('Bearer ', '')
   const payload = await verifyJWT(token, config.jwtSecretKey)
 
   return payload

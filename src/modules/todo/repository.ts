@@ -1,11 +1,24 @@
+import { Op } from 'sequelize'
 import models from '@/database'
 import { TodoModel } from '@/database/models/todo.model'
-import { ITodo, ITag } from '@/types'
+import { ITodo, ITag, TodoFilterParams } from '@/types'
 
-export const getAllTodos = async (userId: number): Promise<{ rows: TodoModel[]; count: number }> => {
+export const getAllTodos = async (params: TodoFilterParams): Promise<{ rows: TodoModel[]; count: number }> => {
+  const where: Record<string, number | string | boolean | object> = {
+    userId: params.userId,
+  }
+  if (params.title) {
+    where.title = {
+      [Op.like]: `%${params.title}%`,
+    }
+  }
+  if (params.completed !== undefined) {
+    where.completed = params.completed
+  }
+
   return await models.Todos.findAndCountAll({
     attributes: { exclude: ['createdAt', 'updatedAt'] },
-    where: { userId: userId },
+    where,
     distinct: true,
     include: {
       model: models.Tags,

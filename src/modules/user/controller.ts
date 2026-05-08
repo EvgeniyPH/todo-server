@@ -13,7 +13,7 @@ class UserController {
       const userId = req.payload.userId
       const result = await profileService(userId)
 
-      res.status(200).json({ data: result })
+      res.status(200).json({ profile: result })
     } catch (error) {
       next(error)
     }

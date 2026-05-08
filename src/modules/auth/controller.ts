@@ -11,9 +11,7 @@ class AuthController {
       }
       const result = await loginService(userData)
 
-      res.status(201).json({
-        data: result,
-      })
+      res.status(201).json(result)
     } catch (error) {
       next(error)
     }
@@ -28,9 +26,7 @@ class AuthController {
       }
       const result = await registerService(userData)
 
-      res.status(201).json({
-        data: result,
-      })
+      res.status(201).json(result)
     } catch (error) {
       next(error)
     }

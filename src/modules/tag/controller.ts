@@ -13,7 +13,7 @@ class TagController {
       const result = await getAllTagsService(req.payload.userId)
 
       res.status(201).json({
-        data: result,
+        tags: result,
       })
     } catch (error) {
       next(error)
