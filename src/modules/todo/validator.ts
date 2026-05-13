@@ -37,3 +37,36 @@ export const validateTodo = (todoData: ITodo) => {
 
   return schema.validate(todoData, options)
 }
+
+export const validateTodoDeleteParams = (params: { id?: number; userId: number }) => {
+  const schema = Joi.object({
+    id: Joi.number().required().messages({
+      'number.required': 'Todo ID is required',
+    }),
+    userId: Joi.number().required().messages({
+      'number.required': 'User ID is required',
+    }),
+  })
+
+  return schema.validate(params, options)
+}
+
+export const validateTodoToggleParams = (params: {
+  id?: number
+  userId: number
+  completed: boolean
+}) => {
+  const schema = Joi.object({
+    id: Joi.number().required().messages({
+      'number.required': 'Todo ID is required',
+    }),
+    userId: Joi.number().required().messages({
+      'number.required': 'User ID is required',
+    }),
+    completed: Joi.boolean().required().messages({
+      'boolean.required': 'Completed is required',
+    }),
+  })
+
+  return schema.validate(params, options)
+}

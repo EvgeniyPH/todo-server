@@ -2,7 +2,7 @@ import { validateRegister, validateLogin } from './validator'
 import { findUserByEmail, createUser } from './repository'
 import { compareSync, hash } from 'bcrypt'
 import { generateJWT } from '@/utils/jwtUtils'
-import config from '@/config/config'
+import config from '@/config'
 import { IUser, IUserResponse } from '@/types'
 import ApiErrors from '@/error/ApiErrors'
 
@@ -11,7 +11,10 @@ interface LoginResponse {
   accessToken: string
 }
 
-export const loginService = async (userData: { email: string; password: string }): Promise<LoginResponse> => {
+export const loginService = async (userData: {
+  email: string
+  password: string
+}): Promise<LoginResponse> => {
   const { error } = validateLogin(userData)
   if (error) {
     throw new ApiErrors(error.message, 400)

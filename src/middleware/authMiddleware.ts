@@ -1,10 +1,10 @@
-import config from '@/config/config'
+import config from '@/config'
 import ApiErrors from '@/error/ApiErrors'
 import { verifyJWT } from '@/utils/jwtUtils'
 import { NextFunction, Response } from 'express'
 import { IRequestPayload } from '@/types'
 
-const decodeToken = async (token: string | undefined) => {
+const decodeToken = async (token?: string) => {
   if (!token) {
     throw new ApiErrors('Authorization header missing', 401)
   }
@@ -33,6 +33,6 @@ export const authMiddleware = async (req: IRequestPayload, res: Response, next: 
 
     next()
   } catch (error: any) {
-    next(new ApiErrors(error.message, 401))
+    next(new ApiErrors('Access token expired or invalid', 401))
   }
 }

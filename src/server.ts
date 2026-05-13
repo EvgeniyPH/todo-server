@@ -1,5 +1,5 @@
 import app from './app'
-import config from './config/config'
+import config from './config'
 import { database } from '@/database' // Import the models file
 // import models from '@/database'
 

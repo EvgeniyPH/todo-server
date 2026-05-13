@@ -1,5 +1,5 @@
 import Sequelize, { Dialect } from 'sequelize'
-import config from '../config/config'
+import config from '../config'
 import TodoInit, { TodoModel } from './models/todo.model'
 import UserInit, { UserModel } from './models/user.model'
 import TagInit, { TagModel } from './models/tag.model'
@@ -50,8 +50,18 @@ const models = (): IModels => {
   })
 
   // Define many-to-many relationship between Todo and Tag through a join table 'todo_tags'
-  Todos.belongsToMany(Tags, { through: TodoTag, as: 'tags', foreignKey: 'todoId', otherKey: 'tagId' })
-  Tags.belongsToMany(Todos, { through: TodoTag, as: 'todos', foreignKey: 'tagId', otherKey: 'todoId' })
+  Todos.belongsToMany(Tags, {
+    through: TodoTag,
+    as: 'tags',
+    foreignKey: 'todoId',
+    otherKey: 'tagId',
+  })
+  Tags.belongsToMany(Todos, {
+    through: TodoTag,
+    as: 'todos',
+    foreignKey: 'tagId',
+    otherKey: 'todoId',
+  })
 
   return {
     Users: Users,

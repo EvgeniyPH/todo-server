@@ -4,6 +4,9 @@ import { authMiddleware } from '@/middleware/authMiddleware'
 
 const router = express.Router()
 router.get('/list', authMiddleware, controller.getAllTodos)
-router.post('/create', authMiddleware, controller.createTodo)
+router.get('/totals', authMiddleware, controller.countTotals)
+router.post('/', authMiddleware, controller.createTodo)
+router.post('/toggle/:id', authMiddleware, controller.toggleTodo)
+router.delete('/:id', authMiddleware, controller.deleteTodo)
 
 export default router
