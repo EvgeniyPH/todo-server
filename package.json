@@ -7,7 +7,9 @@
     "build": "tsc && tsc-alias && echo 'Build Finished!'",
     "start": "node dist/server.js",
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node -r tsconfig-paths/register' src/server.ts",
-    "lint": "eslint 'src/**/*.ts'"
+    "lint": "eslint 'src/**/*.ts'",
+    "migration:generate": "sequelize migration:generate --name",
+    "migration": "sequelize db:migrate"
   },
   "repository": {
     "type": "git",
@@ -39,6 +41,7 @@
     "@types/node": "^25.6.0",
     "eslint": "^10.2.1",
     "nodemon": "^3.1.14",
+    "sequelize-cli": "^6.6.5",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.17",
     "tsconfig-paths": "^4.2.0",

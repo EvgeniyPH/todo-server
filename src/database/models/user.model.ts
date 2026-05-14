@@ -22,12 +22,12 @@ export default function (sequelize: Sequelize): typeof UserModel {
       },
       email: {
         allowNull: false,
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(45),
         unique: true,
       },
       username: {
         allowNull: true,
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(45),
       },
       password: {
         allowNull: false,
