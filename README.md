@@ -4,7 +4,7 @@ Backend for the Todo application, built with Node.js, Express, and Sequelize ORM
 
 ## Tech Stack
 
-- **Framework**: Express.js
+- **Framework**: Express.js (v5)
 - **Language**: TypeScript
 - **ORM**: Sequelize
 - **Database**: PostgreSQL
@@ -31,6 +31,11 @@ Backend for the Todo application, built with Node.js, Express, and Sequelize ORM
    # Update .env with your database credentials and JWT_SECRET_KEY
    ```
 
+3. Run migrations:
+   ```bash
+   npm run migration
+   ```
+
 ### Development
 
 Run the development server with hot-reload and path alias support:
@@ -46,12 +51,19 @@ npm run dev
 
 ## Architecture
 
-- `src/modules/`: Feature-based modules (Controller/Service/Repository).
-- `src/database/`: Sequelize models and association definitions.
+- `src/modules/`: Feature-based modules (Controller/Service/Repository). Current modules: `auth`, `user`, `todo`, `tag`.
+- `src/database/`: Sequelize models, migrations, and association definitions.
 - `src/routes/`: Centralized routing, prefixed with `/api`.
-- `src/middleware/`: Global middlewares (auth, error handling, logging).
+- `src/middleware/`: Global middlewares (auth, error handling).
+- `src/config/`: Configuration management using `dotenv`.
+- `src/error/`: Custom error classes (e.g., `ApiErrors`).
+- `src/utils/`: Utility functions.
 
 ## Database Management
 
-This project uses `sequelize.sync()` for schema management. There is no separate migration CLI. 
-To sync changes during development, you can use `await database.sync({ alter: true })` in `src/server.ts`.
+This project uses Sequelize Migrations for schema management.
+
+- **Generate Migration**: `npm run migration:generate -- some_name`
+- **Run Migrations**: `npm run migration`
+
+The database configuration is managed in `src/config/index.ts` and models are initialized in `src/database/index.ts`.
